@@ -1,0 +1,20 @@
+# Imagen base de Node.js
+FROM node:20-alpine
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Copiar solo los archivos de dependencias primero
+COPY package*.json ./
+
+# Instalar dependencias (incluyendo devDependencies)
+RUN npm ci --no-audit --no-fund
+
+# Copiar el resto del proyecto
+COPY . .
+
+# Exponer el puerto de la API
+EXPOSE 3000
+
+# Comando por defecto, se puede sobrescribir desde docker-compose
+CMD ["npm", "run", "dev"]

@@ -1,0 +1,1 @@
+export { MailNotification } from './mail.notification';
